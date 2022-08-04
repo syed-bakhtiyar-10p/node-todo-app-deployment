@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const connectionPromise = require('./shared/dbModule/dbModule');
-require('dotenv').config();
+// require('dotenv').config();
 console.log({environments: process.env})
 
 
@@ -24,12 +24,6 @@ connectionPromise.then((connection)=>{
     app.use(bodyParser.urlencoded({
         extended: true
     }));
-
-    /** shared service */
-    // const dialogFlowService = require('./shared/services/dialog-flow.service');
-    
-    // /** Common services */
-    // const emailService = require('./core/services/common/email-service');
 
     // /** App services */
     const todoService = require('./core/services/todo')(connection);

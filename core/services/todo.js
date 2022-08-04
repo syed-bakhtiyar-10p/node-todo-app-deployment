@@ -14,7 +14,7 @@ module.exports = (connection) => {
   };
 
   const getTodo = () => {
-    const query = `SELECT id, content, timestamp FROM ${TABLES.TODO_TABLE}`;
+    const query = `SELECT id, content, timestamp FROM ${TABLES.TODO_TABLE} ORDER BY timestamp DESC`;
     return new Promise((resolve, reject) => {
       connection.query(query, (err, data) => {
         if (err) {
