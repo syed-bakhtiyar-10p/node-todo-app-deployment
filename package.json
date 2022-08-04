@@ -9,8 +9,10 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "aws-sdk": "^2.1188.0",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
     "express": "^4.17.1",
     "global": "^4.4.0",
     "moment": "^2.29.1",

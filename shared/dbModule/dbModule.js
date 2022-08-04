@@ -1,23 +1,29 @@
-const connection = require('./config');
+const pool = require('./config');
 const schemas = require('./dbSchema');
 
-const connectionPromise = new Promise((resolve, reject)=>{
-    connection.connect(async err => {
-        if(err) {
-            reject(err);
-            return;
-        };
+const connectionPromise = new Promise(async (resolve, reject)=>{
+    try {
+        const connection = await pool(); 
+        connection.connect(async err => {
+            if(err) {
+                reject(err);
+                return;
+            };
+        
+            try {
+                await createTable(connection, schemas.CREATE_TODO_TABLE);
+                resolve(connection);
+            } catch (error) {
+                reject(error);
+            }
+        });
+    } catch (error) {
+        reject(err);
+    }
     
-        try {
-            await createTable(schemas.CREATE_TODO_TABLE);
-            resolve(connection);
-        } catch (error) {
-            reject(error);
-        }
-    });
 });
 
-const createTable = (tableSchema) => {
+const createTable = (connection, tableSchema) => {
     return new Promise((resolve, reject)=>{
         connection.query(tableSchema, (err, result)=>{
             if(err) {

@@ -1,7 +1,9 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
-const connectionPromise = require('./shared/dbModule/dbModule')
+const connectionPromise = require('./shared/dbModule/dbModule');
+require('dotenv').config();
+console.log({environments: process.env})
 
 
 connectionPromise.then((connection)=>{
@@ -38,10 +40,11 @@ connectionPromise.then((connection)=>{
     // middleware handle for routing
     app.use('/', todoRouter);
 
+    app.listen(4000, ()=>{
+        console.log('api is running 4000');
+    });
+
 }).catch((error) => {
     console.log(error);
 })
 
-app.listen(4000, ()=>{
-    console.log('api is running 4000');
-});
