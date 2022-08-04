@@ -18,7 +18,7 @@ const connectionPromise = new Promise(async (resolve, reject)=>{
             }
         });
     } catch (error) {
-        reject(err);
+        reject(error);
     }
     
 });
