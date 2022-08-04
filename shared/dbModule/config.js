@@ -15,7 +15,7 @@ const pool = () => {
           })
         );
       } catch(e) {
-        reject(err);
+        reject(e);
       }
   });
 };
